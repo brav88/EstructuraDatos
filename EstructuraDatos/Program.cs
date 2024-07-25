@@ -11,7 +11,7 @@ namespace EstructuraDatos
 	internal class Program
 	{
 		static void Main(string[] args)
-		{
+		{				
 			string opt = "";
 			Cola miCola = new Cola();			
 			Pila miPila = new Pila();
@@ -35,6 +35,7 @@ namespace EstructuraDatos
 				Console.WriteLine("12. Imprimir Lista Doble Reversa");
 				Console.WriteLine("13. Encolar despues de");
 				Console.WriteLine("14. Encolar antes de");
+				Console.WriteLine("15. Menu Arboles");
 				Console.WriteLine("99. Salir");
 
 				opt = Console.ReadLine();
@@ -189,6 +190,12 @@ namespace EstructuraDatos
 					listaDoblementeEnlazada.InsertarAntesDe(personaNueva, personaActual);
 
 					Console.WriteLine("Dato encolado con exito");
+				}
+
+				if (opt == "15")
+				{
+					IniciaArbolBinario arbolBinario = new IniciaArbolBinario();
+					arbolBinario.Main();
 				}
 
 			} while (opt != "99");
