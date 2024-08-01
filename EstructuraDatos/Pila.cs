@@ -50,7 +50,17 @@ namespace EstructuraDatos
 
 				if (opt == "4")
 				{
-					//TO-DO: Buscar en la pila
+					Console.WriteLine("Digite el nombre");
+					string name = Console.ReadLine();
+
+					if (miPila.Buscar(name))
+					{
+						Console.WriteLine("Dato encontrado");
+					}
+					else
+					{
+						Console.WriteLine("Dato NO encontrado");
+					}
 				}
 
 			} while (opt != "99");
@@ -83,6 +93,31 @@ namespace EstructuraDatos
 				nodo = nodo.Siguiente;
 				Console.WriteLine(nodo.Persona.Name + ' ' + nodo.Persona.LastName);
 			}
+		}
+
+		public bool Buscar(string name)
+		{
+			if (EstaVacia())
+			{
+				Console.WriteLine("La pila esta vacia");
+				
+				return false;
+			}
+
+			Nodo nodo = cima;
+
+			do
+			{
+				if (nodo.Persona.Name == name)
+				{
+					return true;
+				}
+
+				nodo = nodo.Siguiente;
+
+			} while (nodo != null);
+
+			return false;
 		}
 
 		public void Push(Persona persona)

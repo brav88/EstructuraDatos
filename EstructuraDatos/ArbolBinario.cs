@@ -11,17 +11,62 @@ namespace EstructuraDatos
 		public void Main()
 		{
 			ArbolBinario miArbol = new ArbolBinario();
+			ArbolBinario miArbol2 = new ArbolBinario();
+			string opt = "";
 
-			Console.WriteLine("Cuantos nodos desea en el arbol?");
-			int cantidadNodos = Convert.ToInt16(Console.ReadLine());
-
-			for (int i = 1; i <= cantidadNodos; i++)
+			do
 			{
-				Console.WriteLine("Digite el numero del nodo " + i);
-				int nodo = Convert.ToInt16(Console.ReadLine());
-				miArbol.Insertar(nodo);
-			}
-			
+				Console.WriteLine("Que quiere hacer con los Arboles?");
+				Console.WriteLine("1. Crear un arbol segun cantidad de nodos");
+				Console.WriteLine("2. Verificar si 2 arboles son iguales");
+				
+
+				opt = Console.ReadLine();
+
+				if (opt == "1")
+				{
+					Console.WriteLine("Cuantos nodos desea en el arbol?");
+					int cantidadNodos = Convert.ToInt16(Console.ReadLine());
+
+					for (int i = 1; i <= cantidadNodos; i++)
+					{
+						Console.WriteLine("Digite el numero del nodo " + i);
+						int nodo = Convert.ToInt16(Console.ReadLine());
+						miArbol.Insertar(nodo);
+					}
+				}
+
+				if (opt == "2")
+				{
+					Console.WriteLine("Cuantos nodos desea en el arbol 1 ?");
+					int cantidadNodos1 = Convert.ToInt16(Console.ReadLine());
+
+					for (int i = 1; i <= cantidadNodos1; i++)
+					{
+						Console.WriteLine("Digite el numero del nodo " + i + " del Arbol 1");
+						int nodo = Convert.ToInt16(Console.ReadLine());
+						miArbol.Insertar(nodo);
+					}
+
+					Console.WriteLine("Cuantos nodos desea en el arbol 2 ?");
+					int cantidadNodos2 = Convert.ToInt16(Console.ReadLine());
+
+					for (int i = 1; i <= cantidadNodos2; i++)
+					{
+						Console.WriteLine("Digite el numero del nodo " + i + " del Arbol 2");
+						int nodo = Convert.ToInt16(Console.ReadLine());
+						miArbol2.Insertar(nodo);
+					}
+
+					miArbol.DibujarArbolDirectorio(miArbol.raiz);
+					miArbol2.DibujarArbolDirectorio(miArbol2.raiz);
+
+					Console.WriteLine("Resultado");
+					miArbol.CompararArboles(miArbol, miArbol2);
+				}
+
+			} while (opt != "99");
+
 			miArbol.DibujarArbolDirectorio(miArbol.raiz);
 			miArbol.DibujarArbolBinario(miArbol.raiz);
 		}
@@ -48,6 +93,13 @@ namespace EstructuraDatos
 		public ArbolBinario()
 		{
 			raiz = null;
+		}
+
+		public bool CompararArboles(ArbolBinario arbol1, ArbolBinario arbol2)
+		{
+			//TO-DO Algoritmo que determina si 2 arboles son iguales
+
+			return false;
 		}
 
 		public void Insertar(int valor)
