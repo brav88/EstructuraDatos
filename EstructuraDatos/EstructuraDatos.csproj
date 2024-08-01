@@ -44,10 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArbolBinario.cs" />
-    <Compile Include="Ejemplos.cs" />
+    <Compile Include="Cola.cs" />
+    <Compile Include="OtrosEjemplos\Ejemplos.cs" />
+    <Compile Include="ListaDoblementeEnlazada.cs" />
+    <Compile Include="ListaSimple.cs" />
+    <Compile Include="Nodos.cs" />
+    <Compile Include="Persona.cs" />
+    <Compile Include="Pila.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vehiculo.cs" />
+    <Compile Include="OtrosEjemplos\Vehiculo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
