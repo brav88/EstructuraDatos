@@ -20,7 +20,6 @@ namespace EstructuraDatos
 				Console.WriteLine("1. Crear un arbol segun cantidad de nodos");
 				Console.WriteLine("2. Verificar si 2 arboles son iguales");
 				
-
 				opt = Console.ReadLine();
 
 				if (opt == "1")
@@ -56,19 +55,25 @@ namespace EstructuraDatos
 						Console.WriteLine("Digite el numero del nodo " + i + " del Arbol 2");
 						int nodo = Convert.ToInt16(Console.ReadLine());
 						miArbol2.Insertar(nodo);
-					}
-
-					miArbol.DibujarArbolDirectorio(miArbol.raiz);
-					miArbol2.DibujarArbolDirectorio(miArbol2.raiz);
-
-					Console.WriteLine("Resultado");
-					miArbol.CompararArboles(miArbol, miArbol2);
+					}				
 				}
 
-			} while (opt != "99");
+				//miArbol.DibujarArbolBinario(miArbol.raiz);
+				//miArbol2.DibujarArbolDirectorio(miArbol2.raiz);
 
-			miArbol.DibujarArbolDirectorio(miArbol.raiz);
-			miArbol.DibujarArbolBinario(miArbol.raiz);
+				Console.WriteLine("Resultado");
+				miArbol.CompararArboles2(miArbol, miArbol2);
+
+				//int altura = miArbol.ObtenerAltura(miArbol.raiz);
+				//Console.WriteLine("La altura del árbol es: " + altura);
+
+				//Console.WriteLine("Impresion INORDEN");
+				//miArbol.MostrarInOrden();
+
+				//int suma = miArbol.ObtenerSumaTotal();
+				//Console.WriteLine("La suma del árbol es: " + suma);
+
+			} while (opt != "99");
 		}
 	}
 
@@ -89,17 +94,65 @@ namespace EstructuraDatos
 	public class ArbolBinario
 	{
 		public NodoArbol raiz;
+		int sumaTotalFinal = 0;
+		List<int> lista;
 
 		public ArbolBinario()
 		{
 			raiz = null;
+			lista = new List<int>();
 		}
 
 		public bool CompararArboles(ArbolBinario arbol1, ArbolBinario arbol2)
 		{
-			//TO-DO Algoritmo que determina si 2 arboles son iguales
+			arbol1.MostrarInOrden();
+			arbol2.MostrarInOrden();
+			
+			if (arbol1.lista.Count != arbol2.lista.Count)
+			{
+				Console.WriteLine("Arboles NO Iguales");
+				return false;
+			}
 
-			return false;
+			for (int i = 0; i < arbol1.lista.Count; i++)
+			{
+				if (arbol1.lista[i] != arbol2.lista[i])
+				{
+					Console.WriteLine("Arboles NO Iguales");
+					return false;
+				}
+			}
+
+			Console.WriteLine("Arboles Iguales");
+			return true;
+		}
+
+		public bool CompararArboles2(ArbolBinario arbol1, ArbolBinario arbol2)
+		{
+			arbol1.MostrarInOrden();
+			arbol2.MostrarInOrden();
+
+			if ((arbol1.lista.Count != arbol2.lista.Count) || (arbol1.ObtenerSumaTotal() != arbol2.ObtenerSumaTotal()))
+			{
+				Console.WriteLine("Arboles NO Iguales");
+				return false;
+			}
+
+			Console.WriteLine("Arboles Iguales");
+			return true;
+		}
+
+		public int ObtenerAltura(NodoArbol nodo)
+		{
+			if (nodo == null)
+			{
+				return -1; // Si el nodo es null, la altura es -1 (árbol vacío)
+			}
+
+			int alturaIzquierda = ObtenerAltura(nodo.Izquierdo);
+			int alturaDerecha = ObtenerAltura(nodo.Derecho);
+
+			return Math.Max(alturaIzquierda, alturaDerecha) + 1;
 		}
 
 		public void Insertar(int valor)
@@ -113,6 +166,32 @@ namespace EstructuraDatos
 			{
 				InsertarRecursivo(raiz, nuevoNodo);
 			}
+		}
+
+		public int ObtenerSumaTotal()
+		{
+			sumaTotalFinal = 0;
+
+			int sumaDerecha = SumaTotal(raiz.Derecho);
+			int sumaIzquierda = SumaTotal(raiz.Izquierdo);
+
+			return sumaDerecha + sumaIzquierda + raiz.Valor;		
+		}
+
+		public int SumaTotal(NodoArbol nodo)
+		{
+
+			if (nodo != null)
+			{
+				sumaTotalFinal = nodo.Valor + SumaTotal(nodo.Derecho);
+				sumaTotalFinal = sumaTotalFinal + SumaTotal(nodo.Izquierdo);
+			}
+			else
+			{
+				return 0;
+			}
+
+			return sumaTotalFinal;
 		}
 
 		private void InsertarRecursivo(NodoArbol actual, NodoArbol nuevoNodo)
@@ -175,6 +254,7 @@ namespace EstructuraDatos
 			{
 				MostrarInOrdenRecursivo(actual.Izquierdo);
 				Console.Write(actual.Valor + " ");
+				lista.Add(actual.Valor);
 				MostrarInOrdenRecursivo(actual.Derecho);
 			}
 		}
